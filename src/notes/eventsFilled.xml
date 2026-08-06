@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--This is an example xml filled with random events-->
+<events>
+ <track type="1" name="early">
+  <event>
+    <title>Julius Caesar invades Britain</title>
+    <date type="start">
+      <year>55</year>
+      <era>BC</era>
+    </date>
+    <date type="end">
+      <year>54</year>
+      <era>BC</era>
+    </date>
+    <description>Julius Caesar led the first Roman expedition to Britain, landing on the Kent coast.</description>
+    <lat>51.1789</lat>
+    <lon>1.1713</lon>
+  </event>
+
+  <event>
+    <title>Battle of Actium</title>
+    <date type="start">
+      <year>31</year>
+      <month>09</month>
+      <era>BC</era>
+    </date>
+    <date type="end">
+    <year>10</year>
+    <month>07</month>
+    <era>BC</era>
+    </date>
+    <description>Octavian defeated the combined forces of Mark Antony and Cleopatra, becoming Rome's first emperor.</description>
+    <lat>38.9419</lat>
+    <lon>20.7400</lon>
+  </event>
+  </track>
+ 
+ <track type="2" name="mid">
+  <event>
+    <title>Storming of the Bastille</title>
+    <date type="start">
+      <year>1789</year>
+      <month>07</month>
+      <day>14</day>
+      <era>AD</era>
+    </date>
+    <date type="end">
+    </date>
+    <description>Parisian crowds stormed the Bastille fortress, marking the start of the French Revolution.</description>
+    <lat>48.8533</lat>
+    <lon>2.3692</lon>
+    <media>https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Prise_de_la_Bastille.jpg/640px-Prise_de_la_Bastille.jpg</media>
+  </event>
+ 
+  <event>
+    <title>Declaration of the Rights of Man</title>
+    <date type="start">
+      <year>1789</year>
+      <month>08</month>
+      <day>26</day>
+      <era>AD</era>
+    </date>
+    <date type="end">
+    </date>
+    <description>The National Constituent Assembly adopted this foundational document of human rights.</description>
+    <lat>48.8566</lat>
+    <lon>2.3522</lon>
+  </event>
+ 
+  <event>
+    <title>Execution of Louis XVI</title>
+    <date type="start">
+      <year>1793</year>
+      <month>01</month>
+      <day>21</day>
+      <era>AD</era>
+    </date>
+    <date type="end">
+    </date>
+    <description>King Louis XVI was guillotined at the Place de la Révolution in Paris.</description>
+    <lat>48.8656</lat>
+    <lon>2.3212</lon>
+  </event>
+ </track>
+
+<track type="3" name="late">
+  <event>
+    <title>Napoleon crowned Emperor</title>
+    <date type="start">
+      <year>1804</year>
+      <month>12</month>
+      <day>02</day>
+      <era>AD</era>
+    </date>
+    <date type="end">
+    </date>
+    <description>Napoleon Bonaparte crowned himself Emperor of the French at Notre-Dame de Paris.</description>
+    <lat>48.8530</lat>
+    <lon>2.3499</lon>
+    <media>https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/David_-_Napoleon_at_the_Saint-Bernard_Pass%2C_20_May_1800.jpg/480px-David_-_Napoleon_at_the_Saint-Bernard_Pass%2C_20_May_1800.jpg</media>
+  </event>
+ </track>
+</events>

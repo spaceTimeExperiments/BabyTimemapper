@@ -40,6 +40,9 @@ body {
   pointer-events: none;
   z-index: 1000;
 }
+.leaflet-control-zoom leaflet-bar leaflet-control {
+  display: none !important;
+}
 
 /* -------------------------------------------------------------------------
    Card panel — shows the selected event's full detail

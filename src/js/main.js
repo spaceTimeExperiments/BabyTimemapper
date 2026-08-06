@@ -130,13 +130,27 @@ async function parseEvents() {
     })
   })
 }
-
 // ---------------------------------------------------------------------------
 // buildMap()
 // Initialises a Leaflet map and adds one marker per event.
 // Clicking a marker triggers full event selection.
 // ---------------------------------------------------------------------------
 function buildMap(events, onSelect) {
+  const svgNS = 'http://www.w3.org/2000/svg'
+
+  const svg = document.createElementNS(svgNS, 'svg')
+  svg.setAttribute('width', 200)
+  svg.setAttribute('height', 300)
+  svg.setAttribute('viewBox', `0 0 200 400`)
+
+  const manila = document.createElementNS(svgNS, 'rect')
+  manila.setAttribute('x', 40)
+  manila.setAttribute('y', 20)
+  manila.setAttribute('width', 150)
+  manila.setAttribute('height', 50)
+  manila.setAttribute('rx', 6)
+  manila.setAttribute('fill', '#ffd484')
+  svg.appendChild(manila)
   
   const map = L.map('map').setView([48.8566, 2.3522], 4)
 
