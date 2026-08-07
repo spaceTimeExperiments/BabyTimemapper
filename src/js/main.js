@@ -130,6 +130,7 @@ async function parseEvents() {
     })
   })
 }
+
 // ---------------------------------------------------------------------------
 // buildMap()
 // Initialises a Leaflet map and adds one marker per event.
@@ -151,7 +152,7 @@ function buildMap(events, onSelect) {
   manila.setAttribute('rx', 6)
   manila.setAttribute('fill', '#ffd484')
   svg.appendChild(manila)
-  
+
   const map = L.map('map').setView([48.8566, 2.3522], 4)
 
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -177,151 +178,116 @@ function buildMap(events, onSelect) {
 }
 
 // ---------------------------------------------------------------------------
-// buildCard()
-// Renders the SVG detail card panel for the currently selected event.
+// buildCardSVG()
+// Builds the decorative background SVG for the card panel —
+// horizontal lines, vertical red line. No text, no buttons.
+// Returns the SVG element so it can be used as a CSS background.
 // ---------------------------------------------------------------------------
-function buildCard(event, index, events, onSelect) {
-  const panel = document.getElementById('card-panel')
-  panel.innerHTML = ''
+function buildCardSVG(width, height) {
+  const svgNS = "http://www.w3.org/2000/svg"
 
   const screenWidth = window.innerWidth
-  const screenHeight = window.innerHeight
   const svgHeight = 159
   const svgWidth = screenWidth
-
-  const svgNS = "http://www.w3.org/2000/svg"
 
   const svg = document.createElementNS(svgNS, "svg")
   svg.setAttribute('viewBox', `0 0 ${svgWidth} ${svgHeight}`)
   svg.setAttribute('width', svgWidth)
   svg.setAttribute('height', svgHeight)
-  svg.style.flexShrink = 0
+  svg.setAttribute('xmlns', svgNS)
 
-  const Hline1 = document.createElementNS(svgNS, "line")
-  Hline1.setAttribute('x1', 0); Hline1.setAttribute('y1', 40)
-  Hline1.setAttribute('x2', svgWidth); Hline1.setAttribute('y2', 40)
-  Hline1.setAttribute('stroke', '#173aff'); Hline1.setAttribute('stroke-width', 3)
-  svg.appendChild(Hline1)
+  const lineYs = [40, 65, 90, 115, 140, 166]
+  lineYs.forEach(y => {
+    const line = document.createElementNS(svgNS, "line")
+    line.setAttribute('x1', 0); line.setAttribute('y1', y)
+    line.setAttribute('x2', width); line.setAttribute('y2', y)
+    line.setAttribute('stroke', '#173aff')
+    line.setAttribute('stroke-width', y === 166 ? 3 : 3)
+    svg.appendChild(line)
+  })
 
-  const Hline2 = document.createElementNS(svgNS, "line")
-  Hline2.setAttribute('x1', 0); Hline2.setAttribute('y1', 65)
-  Hline2.setAttribute('x2', svgWidth); Hline2.setAttribute('y2', 65)
-  Hline2.setAttribute('stroke', '#173aff'); Hline2.setAttribute('stroke-width', 3)
-  svg.appendChild(Hline2)
+  const vline = document.createElementNS(svgNS, "line")
+  vline.setAttribute('x1', 30); vline.setAttribute('y1', 0)
+  vline.setAttribute('x2', 30); vline.setAttribute('y2', height)
+  vline.setAttribute('stroke', '#ff0000')
+  vline.setAttribute('stroke-width', 6)
+  svg.appendChild(vline)
 
-  const Hline3 = document.createElementNS(svgNS, "line")
-  Hline3.setAttribute('x1', 0); Hline3.setAttribute('y1', 90)
-  Hline3.setAttribute('x2', svgWidth); Hline3.setAttribute('y2', 90)
-  Hline3.setAttribute('stroke', '#173aff'); Hline3.setAttribute('stroke-width', 3)
-  svg.appendChild(Hline3)
+  return svg
+}
 
-  const Hline4 = document.createElementNS(svgNS, "line")
-  Hline4.setAttribute('x1', 0); Hline4.setAttribute('y1', 115)
-  Hline4.setAttribute('x2', svgWidth); Hline4.setAttribute('y2', 115)
-  Hline4.setAttribute('stroke', '#173aff'); Hline4.setAttribute('stroke-width', 3)
-  svg.appendChild(Hline4)
+// ---------------------------------------------------------------------------
+// buildCard()
+// Renders the card panel for the currently selected event.
+// The SVG (lines + red line) is the background layer.
+// All text and buttons are real HTML elements on top — they wrap naturally
+// and reflow on mobile without any SVG text limitations.
+// On narrow screens the arrow buttons drop below the text automatically.
+// ---------------------------------------------------------------------------
+function buildCard(event, index, events, onSelect) {
+  const panel = document.getElementById('card-panel')
+  panel.innerHTML = ''
 
-  const Hline5 = document.createElementNS(svgNS, "line")
-  Hline5.setAttribute('x1', 0); Hline5.setAttribute('y1', 140)
-  Hline5.setAttribute('x2', svgWidth); Hline5.setAttribute('y2', 140)
-  Hline5.setAttribute('stroke', '#173aff'); Hline5.setAttribute('stroke-width', 3)
-  svg.appendChild(Hline5)
+  // --- Background SVG layer ---
+  const svgBg = buildCardSVG(panel.offsetWidth || window.innerWidth, 175)
+  svgBg.classList.add('card-bg-svg')
+  panel.appendChild(svgBg)
 
-  const Hline6 = document.createElementNS(svgNS, "line")
-  Hline6.setAttribute('x1', 0); Hline6.setAttribute('y1', 165)
-  Hline6.setAttribute('x2', svgWidth); Hline6.setAttribute('y2', 165)
-  Hline6.setAttribute('stroke', '#173aff'); Hline6.setAttribute('stroke-width', 15)
-  svg.appendChild(Hline6)
+  // --- HTML content layer sits on top of the SVG ---
+  const content = document.createElement('div')
+  content.className = 'card-content'
 
-  const Vline = document.createElementNS(svgNS, "line")
-  Vline.setAttribute('x1', 30); Vline.setAttribute('y1', 0)
-  Vline.setAttribute('x2', 30); Vline.setAttribute('y2', svgHeight)
-  Vline.setAttribute('stroke', '#ff0000'); Vline.setAttribute('stroke-width', 6)
-  svg.appendChild(Vline)
+  // Left column: red line spacer + text
+  const textCol = document.createElement('div')
+  textCol.className = 'card-text-col'
 
-  const date = document.createElementNS(svgNS, "text")
-  date.setAttribute('x', 40); date.setAttribute('y', 35)
-  date.setAttribute('fill', '#ff0000'); date.setAttribute('font-size', 40)
-  date.textContent = `${event.displayDate} - ${event.displayDateEnd}`
-  svg.appendChild(date)
+  const dateEl = document.createElement('p')
+  dateEl.className = 'card-date'
+  dateEl.textContent = event.displayDateEnd
+    ? `${event.displayDate} — ${event.displayDateEnd}`
+    : event.displayDate
+  textCol.appendChild(dateEl)
 
-  const title = document.createElementNS(svgNS, "text")
-  title.setAttribute('x', 40); title.setAttribute('y', 62)
-  title.setAttribute('fill', '#173aff'); title.setAttribute('font-size', 30)
-  title.textContent = `${event.title}`
-  svg.appendChild(title)
+  const titleEl = document.createElement('p')
+  titleEl.className = 'card-title'
+  titleEl.textContent = event.title
+  textCol.appendChild(titleEl)
 
-  const foreign = document.createElementNS(svgNS, "foreignObject")
-  foreign.setAttribute("x", 40)
-  foreign.setAttribute("y", 90)
-  foreign.setAttribute("width", svgWidth)
-  foreign.setAttribute("height", screenHeight)
+  const descEl = document.createElement('p')
+  descEl.className = 'card-desc'
+  descEl.textContent = event.description
+  textCol.appendChild(descEl)
 
-  const desc = document.createElement("desc")
-  desc.style.fontSize = "25px"
-  desc.style.color = "#363636"
-  desc.style.wordWrap = "break-word"
-  desc.style.overflowWrap = "break-word"
-  desc.textContent = `${event.description}`
-  foreign.appendChild(desc)
-  svg.appendChild(foreign)
+  content.appendChild(textCol)
 
-  console.log(events)
-  console.log(index)
+  // Arrow buttons column — flows below text on mobile via flex-wrap
+  const btnCol = document.createElement('div')
+  btnCol.className = 'card-btn-col'
 
-  // Next button — only show if there's a next event
-  if (index < events.length - 1) {
-    const nextBtn = document.createElementNS(svgNS, 'g')
-    nextBtn.style.cursor = 'pointer'
-
-    const btnRect = document.createElementNS(svgNS, 'rect')
-    btnRect.setAttribute('x', 600); btnRect.setAttribute('y', 200)
-    btnRect.setAttribute('width', 500); btnRect.setAttribute('height', 700)
-    btnRect.setAttribute('rx', 6); btnRect.setAttribute('fill', 'url(#arrow)')
-    nextBtn.appendChild(btnRect)
-
-    nextBtn.addEventListener('click', () => onSelect(index + 1))
-    svg.appendChild(nextBtn)
-
-    const arrow = document.createElementNS(svgNS, "image")
-    arrow.setAttribute("href", "./images/arrow.png")
-    arrow.setAttribute("x", svgWidth - 400); arrow.setAttribute("y", 55)
-    arrow.setAttribute("width", 200); arrow.setAttribute("height", 120)
-    arrow.setAttribute('class', 'arrow')
-    nextBtn.appendChild(arrow)
-  }
-
-  // Previous button — only show if there's a previous event
   if (index > 0) {
-    const prevBtn = document.createElementNS(svgNS, 'g')
-    prevBtn.style.cursor = 'pointer'
-
-    const btnRect = document.createElementNS(svgNS, 'rect')
-    btnRect.setAttribute('x', 20); btnRect.setAttribute('y', 120)
-    btnRect.setAttribute('width', 80); btnRect.setAttribute('height', 30)
-    btnRect.setAttribute('rx', 6); btnRect.setAttribute('fill', 'url(#arrowB)')
-    prevBtn.appendChild(btnRect)
-
+    const prevBtn = document.createElement('button')
+    prevBtn.className = 'card-btn'
+    const prevImg = document.createElement('img')
+    prevImg.src = './images/arrowB.png'
+    prevImg.alt = 'Previous'
+    prevBtn.appendChild(prevImg)
     prevBtn.addEventListener('click', () => onSelect(index - 1))
-    svg.appendChild(prevBtn)
-
-    const arrowB = document.createElementNS(svgNS, "image")
-    arrowB.setAttribute("href", "./images/arrowB.png")
-    arrowB.setAttribute("x", svgWidth - 500); arrowB.setAttribute("y", 5)
-    arrowB.setAttribute("width", 200); arrowB.setAttribute("height", 120)
-    arrowB.setAttribute('class', 'arrow')
-    prevBtn.appendChild(arrowB)
+    btnCol.appendChild(prevBtn)
   }
 
-  panel.appendChild(svg)
+  if (index < events.length - 1) {
+    const nextBtn = document.createElement('button')
+    nextBtn.className = 'card-btn'
+    const nextImg = document.createElement('img')
+    nextImg.src = './images/arrow.png'
+    nextImg.alt = 'Next'
+    nextBtn.appendChild(nextImg)
+    nextBtn.addEventListener('click', () => onSelect(index + 1))
+    btnCol.appendChild(nextBtn)
+  }
 
-  const titleWidth = title.getComputedTextLength()
-
-  const highlight = document.createElementNS(svgNS, "line")
-  highlight.setAttribute("x1", 35); highlight.setAttribute("y1", 52.5)
-  highlight.setAttribute("x2", 40 + titleWidth); highlight.setAttribute("y2", 52.5)
-  highlight.setAttribute("stroke", "#17aaff77"); highlight.setAttribute("stroke-width", 20)
-  svg.insertBefore(highlight, title)
+  content.appendChild(btnCol)
+  panel.appendChild(content)
 }
 
 // ---------------------------------------------------------------------------
@@ -359,19 +325,20 @@ function buildFixedPanel(events, svgHeight) {
   events.forEach(event => {
     if (seen.has(event.track)) return
     seen.add(event.track)
-    const label = document.createElementNS(svgNS, 'text')
-    label.setAttribute('x', 40)
-    label.setAttribute('y', trackY[event.track])
-    label.setAttribute('fill', '#ff0000'); label.setAttribute('font-size', 30)
-    label.setAttribute('style', 'font-weight: 700;')
-    label.setAttribute('style', 'font-family: "BrownCookies";')
-    label.textContent = event.name
-    fixed.appendChild(label)
+
     const highlightL = document.createElementNS(svgNS, 'line')
     highlightL.setAttribute('x1', 35); highlightL.setAttribute('y1', trackY[event.track] - 10)
     highlightL.setAttribute('x2', panelWidth); highlightL.setAttribute('y2', trackY[event.track] - 10)
     highlightL.setAttribute('stroke', '#ff910091'); highlightL.setAttribute('stroke-width', 25)
-    fixed.insertBefore(highlightL, label)
+    fixed.appendChild(highlightL)
+
+    const label = document.createElementNS(svgNS, 'text')
+    label.setAttribute('x', 40)
+    label.setAttribute('y', trackY[event.track])
+    label.setAttribute('fill', '#ff0000'); label.setAttribute('font-size', 30)
+    label.setAttribute('style', 'font-weight: 700; font-family: "BrownCookies";')
+    label.textContent = event.name
+    fixed.appendChild(label)
   })
 }
 
@@ -380,7 +347,7 @@ function buildFixedPanel(events, svgHeight) {
 // Generates the proportional SVG timeline ruler from event data.
 // Replicates the XSLT logic from timeline.xsl:
 //   - x-spacer of 10 units per year
-//   - tick marks every 5 / 10 / 50 / 100 years
+//   - tick marks every 1 / 5 / 10 / 50 / 100 years
 //   - span rectangles from start to end date for each event
 //   - group translated so negative (BC) coordinates are visible
 // The fixed left panel (labels, lines) lives in buildFixedPanel() and
@@ -432,13 +399,14 @@ function buildTimelineSVG(events, onSelect) {
   rect.style.filter = 'drop-shadow(3px 3px 5px rgba(2, 29, 102, 0.45))'
   g.appendChild(rect)
 
-  // Tick marks — every 5 / 10 / 50 / 100 years
+  // Tick marks — every 1 / 5 / 10 / 50 / 100 years
   for (let year = Math.ceil(earliestDate); year <= latestDate; year += 1) {
     const x = year * xSpacer
     const isCentury     = year % 100 === 0
     const isHalfCentury = year % 50  === 0
     const isDecade      = year % 10  === 0
     const isHalfDecade  = year % 5   === 0
+
     if (isCentury) {
       const line = document.createElementNS(svgNS, 'line')
       line.setAttribute('x1', x); line.setAttribute('y1', rulerY)
@@ -503,14 +471,13 @@ function buildTimelineSVG(events, onSelect) {
   g.appendChild(hole)
 
   // Event span rectangles — drawn from start to end date
-  // y positions must match the track label positions in buildFixedPanel()
   const trackY = { 1: 39, 2: 114, 3: 189 }
   events.forEach((event, index) => {
     const startX = event.astronomicalYear * xSpacer
     const endX   = event.astronomicalYearEnd !== null
       ? event.astronomicalYearEnd * xSpacer
       : startX + 20
-    const spanWidth = Math.max(endX - startX)
+    const spanWidth = Math.max(endX - startX, 20)
 
     const note = document.createElementNS(svgNS, 'rect')
     note.setAttribute('width', spanWidth)
@@ -525,7 +492,8 @@ function buildTimelineSVG(events, onSelect) {
     note.addEventListener('click', () => onSelect(index))
     g.appendChild(note)
   })
-   const trackY2 = { 1: 62, 2: 136, 3: 211 }
+
+  const trackY2 = { 1: 62, 2: 136, 3: 211 }
   const seen = new Set()
   events.forEach(event => {
     if (seen.has(event.track)) return

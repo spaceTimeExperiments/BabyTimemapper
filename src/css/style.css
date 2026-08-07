@@ -17,7 +17,7 @@ body {
 }
 
 /* -------------------------------------------------------------------------
-   Map panel — takes up most of the vertical space
+   Map panel
 ------------------------------------------------------------------------- */
 .map-frame {
   position: relative;
@@ -40,32 +40,131 @@ body {
   pointer-events: none;
   z-index: 1000;
 }
-.leaflet-control-zoom leaflet-bar leaflet-control {
-  display: none !important;
-}
 
 /* -------------------------------------------------------------------------
-   Card panel — shows the selected event's full detail
+   Card panel — SVG background + HTML content layered on top
 ------------------------------------------------------------------------- */
 @font-face {
-    font-family: "BrownCookies";
-    src: url(../../fonts/BrownCookies.otf) format("opentype");
+  font-family: "BrownCookies";
+  src: url(../../fonts/BrownCookies.otf) format("opentype");
 }
 
 #card-panel {
-  height: 160px;
+  position: relative;        /* anchor for absolute children */
+  height: 175px;             /* matches the SVG background height */
   background: #ecece8;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: left;
   border-top: 1px solid #a0a0a0;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
   flex-shrink: 0;
   font-family: "BrownCookies";
+  overflow: hidden;
 }
+
+/* The SVG is the background — stretched to fill the panel */
+.card-bg-svg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;      /* clicks pass through to HTML content */
+}
+
+/* HTML content sits on top of the SVG background */
+.card-content {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Each text element is absolutely positioned to match the SVG y coordinates.
+   x=40 in SVG = left: 40px in HTML (just right of the red line at x=30).
+   y values are the SVG baseline positions converted to top offsets:
+   date baseline y=35  → top: 12px  (35px - ~23px cap height)
+   title baseline y=62 → top: 40px
+   desc baseline y=90  → top: 68px                                        */
+.card-date {
+  position: absolute;
+  top: 10px;
+  left: 40px;
+  right: 220px;             /* leave room for arrows on the right */
+  font-size: 40px;
+  color: #ff0000;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1;
+}
+
+.card-title {
+  position: absolute;
+  top: 43px;
+  left: 40px;
+  right: 220px;
+  font-size: 30px;
+  color: #173aff;
+  font-weight: 600;
+  word-wrap: break-word;
+  line-height: 1.2;
+}
+
+.card-desc {
+  position: absolute;
+  top: 70px;
+  left: 40px;
+  right: 220px;
+  bottom: 8px;
+  font-size: 25px;
+  color: #363636;
+  line-height: 1.4;
+  word-wrap: break-word;
+  overflow: hidden;
+}
+
+/* Button column — pinned to the right on desktop, drops below on mobile */
+.card-btn-col {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+}
+
+/* On narrow screens buttons move to the bottom and text gets full width */
+@media (max-width: 600px) {
+  .card-date,
+  .card-title,
+  .card-desc {
+    right: 8px;              /* full width on mobile */
+  }
+  .card-btn-col {
+    position: static;
+    width: 100%;
+    justify-content: flex-end;
+    padding: 4px 8px 8px;
+  }
+  .card-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.card-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.card-btn img {
+  height: 80px;
+  width: auto;
+  display: block;
+}
+
 /* -------------------------------------------------------------------------
    Timeline container — fixed label panel + scrollable ruler side by side
 ------------------------------------------------------------------------- */
@@ -76,7 +175,6 @@ body {
   flex-shrink: 0;
 }
 
-/* Fixed left panel — track labels and divider lines, does not scroll */
 #timeline-fixed {
   flex-shrink: 0;
   width: 200px;
@@ -85,7 +183,6 @@ body {
   z-index: 1;
 }
 
-/* Scrollable ruler — tick marks and event spans scroll horizontally */
 #timeline-ruler {
   flex: 1;
   overflow-x: auto;
@@ -106,7 +203,6 @@ body {
   border-radius: 2px;
 }
 
-/* Event spans on the SVG ruler */
 .event-span {
   transition: fill 0.2s;
 }
