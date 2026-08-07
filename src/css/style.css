@@ -63,6 +63,13 @@ body {
   flex-shrink: 0;
   font-family: "BrownCookies";
 }
+#card-panel > svg {
+  width:100%;
+ min-width:800px;
+}
+#card-panel image.arrow {
+  width:6vw;
+}
 
 /* -------------------------------------------------------------------------
    Timeline container — fixed label panel + scrollable ruler side by side
