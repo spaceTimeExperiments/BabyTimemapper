@@ -51,4 +51,5 @@ There are simple rules and directions in ```eventsTemplate.xml``` which are:
 * Events do not need to be in chronological order they will be sorted with a JS function
 * For event tracks please limit to 3 distinct tracks, ie. early events, recent events, future events. Please fill in the 'name=""' with whatever you want and correspond the correct track numder (1, 2, or 3) with the name, (ex. type="1" name="early events" and type="3" name="future events
 * Each track can have multiple events
+
 These can also be found at the top of ```eventsTemplate.xml``` as mentioned before. 

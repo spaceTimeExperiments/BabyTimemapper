@@ -185,6 +185,7 @@ function buildCard(event, index, events, onSelect) {
   panel.innerHTML = ''
 
   const screenWidth = window.innerWidth
+  const screenHeight = window.innerHeight
   const svgHeight = 159
   const svgWidth = screenWidth
 
@@ -254,7 +255,7 @@ function buildCard(event, index, events, onSelect) {
   foreign.setAttribute("x", 40)
   foreign.setAttribute("y", 90)
   foreign.setAttribute("width", svgWidth)
-  foreign.setAttribute("height", svgHeight)
+  foreign.setAttribute("height", screenHeight)
 
   const desc = document.createElement("desc")
   desc.style.fontSize = "25px"
