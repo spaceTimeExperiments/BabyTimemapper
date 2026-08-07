@@ -225,20 +225,23 @@ function buildCard(event, index, events, onSelect) {
   svg.appendChild(Vline)
 
   const date = document.createElementNS(svgNS, "text")
+  date.setAttribute('class', 'card-date')
   date.setAttribute('x', 40); date.setAttribute('y', 35)
-  date.setAttribute('fill', '#ff0000'); date.setAttribute('font-size', 40)
+  date.setAttribute('fill', '#ff0000'); 
   date.textContent = `${event.displayDate} - ${event.displayDateEnd}`
   svg.appendChild(date)
 
   const title = document.createElementNS(svgNS, "text")
+  title.setAttribute('class', 'card-title')
   title.setAttribute('x', 40); title.setAttribute('y', 62)
-  title.setAttribute('fill', '#173aff'); title.setAttribute('font-size', 25)
+  title.setAttribute('fill', '#173aff'); 
   title.textContent = `${event.title}`
   svg.appendChild(title)
 
   const desc = document.createElementNS(svgNS, "text")
+  desc.setAttribute('class', 'card-desc')
   desc.setAttribute('x', 40); desc.setAttribute('y', 89)
-  desc.setAttribute('fill', '#363636'); desc.setAttribute('font-size', 20)
+  desc.setAttribute('fill', '#363636'); 
   desc.textContent = `${event.description}`
   svg.appendChild(desc)
 
@@ -250,7 +253,7 @@ function buildCard(event, index, events, onSelect) {
     const nextBtn = document.createElementNS(svgNS, 'g')
     nextBtn.style.cursor = 'pointer'
 
-    const btnRect = document.createElementNS(svgNS, 'rect')
+   const btnRect = document.createElementNS(svgNS, 'rect')
     btnRect.setAttribute('x', 600); btnRect.setAttribute('y', 200)
     btnRect.setAttribute('width', 500); btnRect.setAttribute('height', 700)
     btnRect.setAttribute('rx', 6); btnRect.setAttribute('fill', 'url(#arrow)')

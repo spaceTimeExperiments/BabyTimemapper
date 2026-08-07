@@ -50,7 +50,7 @@ body {
 }
 
 #card-panel {
-  height: auto;
+  height: 160px;
   background: #ecece8;
   background-size: cover;
   background-repeat: no-repeat;
@@ -58,17 +58,34 @@ body {
   border-top: 1px solid #a0a0a0;
   overflow-y: auto;
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column;
   gap: 4px;
-  flex-shrink: 0;
+  flex-shrink: 0; */
   font-family: "BrownCookies";
 }
 #card-panel > svg {
-  width:100%;
- min-width:800px;
+  /* width:100%;
+ min-width:800px; */
 }
 #card-panel image.arrow {
   width:6vw;
+}
+
+#card-panel .card-date {
+  font-size: 2vw;
+
+}
+#card-panel .card-title {
+  font-size: 1vw;
+
+}
+
+#card-panel .card-desc {
+   font-size: 1vw;
+}
+
+line {
+  stroke-width:.2vw;
 }
 
 /* -------------------------------------------------------------------------
