@@ -246,15 +246,24 @@ function buildCard(event, index, events, onSelect) {
 
   const title = document.createElementNS(svgNS, "text")
   title.setAttribute('x', 40); title.setAttribute('y', 62)
-  title.setAttribute('fill', '#173aff'); title.setAttribute('font-size', 25)
+  title.setAttribute('fill', '#173aff'); title.setAttribute('font-size', 30)
   title.textContent = `${event.title}`
   svg.appendChild(title)
 
-  const desc = document.createElementNS(svgNS, "text")
-  desc.setAttribute('x', 40); desc.setAttribute('y', 89)
-  desc.setAttribute('fill', '#363636'); desc.setAttribute('font-size', 20)
+  const foreign = document.createElementNS(svgNS, "foreignObject")
+  foreign.setAttribute("x", 40)
+  foreign.setAttribute("y", 90)
+  foreign.setAttribute("width", svgWidth)
+  foreign.setAttribute("height", svgHeight)
+
+  const desc = document.createElement("desc")
+  desc.style.fontSize = "25px"
+  desc.style.color = "#363636"
+  desc.style.wordWrap = "break-word"
+  desc.style.overflowWrap = "break-word"
   desc.textContent = `${event.description}`
-  svg.appendChild(desc)
+  foreign.appendChild(desc)
+  svg.appendChild(foreign)
 
   console.log(events)
   console.log(index)
