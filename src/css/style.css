@@ -78,7 +78,7 @@ body {
 }
 
 #card-panel .card-desc {
-  font-size: clamp(0.5rem, 1.7vw, 1.7rem); 
+  font-size: clamp(0.7rem, 2vw, 2rem); 
 }
 
 /* -------------------------------------------------------------------------
