@@ -49,47 +49,29 @@ Once you have Node.js installed you'll need to install the node files needed to 
 ```npm install```
 
 ## The folder structure of BabyTimemapper
+```
 BabyTimemapper/
-
 |-dist
-
 |-fonts
-
 |-node_modules (this one will not be visible since it will be in the gitignore)
-
 |-public
-
 | |-images
-
 | |-events.xml
-
 |-src
-
 | |-css
-
 | | |-style.css
-
 | |-js
-
 | | |-main.js
-
 | |-notes
-
 | | |-eventsFilled.xml
-
 | | |-eventsTemplate.xml
-
 |.gitignore
-
 |index.html
-
 |package-lock.json
-
 |package.json
-
 |README.md
-
 |vite.config.js
+```
 
 ### Once this is complete you should be able to use ```events.xml``` in dist/public to edit the events shown on BabyTimemapper!
 
