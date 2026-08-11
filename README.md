@@ -42,6 +42,9 @@ Verify npm version:
 
 ### Make sure to clone this repo to your local directory before the next step!
 ```git clone https://github.com/spaceTimeExperiments/timeMapper2```
+
+You can also download a .zip file if you cant clone the repo itself, the files can be found when clicking the releases section on the GitHub page and clicking the latest versions tag
+
 Please make sure you have your own repo set up for working with this project, DO NOT push anything back to this repo!
 
 ## Installing the node modules for BabyTimeMapper
@@ -73,11 +76,11 @@ BabyTimemapper/
 |vite.config.js
 ```
 
-### Once this is complete you should be able to use ```events.xml``` in dist/public to edit the events shown on BabyTimemapper!
+### Once this is complete you should be able to use ```events.xml``` in public to edit the events shown on BabyTimemapper!
 
 ## Editing events.xml
 
-To use BabyTimemapper you'll need to edit the ```events.xml``` file directly. There are two templates in the dist/src/notes, ```eventsTemplate.xml``` and ```eventsFilled.xml```, which can be referenced when editing ```events.xml``` in dist/public. 
+To use BabyTimemapper you'll need to edit the ```events.xml``` file directly. There are two templates in the src/notes, ```eventsTemplate.xml``` and ```eventsFilled.xml```, which can be referenced when editing ```events.xml``` in public. 
 There are simple rules and directions in ```eventsTemplate.xml``` which are:
 * The month, day, and era sections are completely optional, if these areas of info are not available to you then dont worry about filling them out, you can just remove them
 * Events do not need to be in chronological order they will be sorted with a JS function
@@ -96,8 +99,11 @@ There will be a series of npm commands that is needed in order to build the webs
 * This will build the site for deployment by packaging it up in the dist folder
 
 ```npm run preview```
-* This is similar to npm run dev, it will run a preview of what the site will look like when deployed on github pages, you can view it by also copy and pasting the link it provides
+* This is similar to npm run dev, it will run a preview of what the site will look like when deployed on GitHub pages, you can view it by also copy and pasting the link it provides
 
 ```npm run deploy```
-* This will deploy your site to github pages where it can be accessed online through the webadress on your repo
+* This will deploy your site to GitHub pages where it can be accessed online through the webadress on your repo
 
+Your workflow will look something like;
+
+```npm run dev --> editing events.xml --> exit npm run dev --> npm run build --> npm run preview --> exit npm run preview --> npm run deploy --> add --> commit --> push```
