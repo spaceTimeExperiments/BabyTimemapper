@@ -1,3 +1,3 @@
 export default {
-    base: '/timeMapper2/',
+    base: '/BabyTimemapper/',
 }
