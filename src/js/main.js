@@ -264,7 +264,7 @@ function buildCard(event, index, events, onSelect) {
 
     const arrow = document.createElementNS(svgNS, "image")
     arrow.setAttribute("href", "./images/arrow.png")
-    arrow.setAttribute("x", screenWidth - 100); arrow.setAttribute("y", 5) /* ebb: changed from y of 55 */
+    arrow.setAttribute("x", screenWidth - 200); arrow.setAttribute("y", 5) /* ebb: changed from y of 55 */
     /* ebb: Moved to CSS: Need a more flexible way to set the width on these arrows relative to viewport. 
     arrow.setAttribute("width", 200); arrow.setAttribute("height", 120)*/
     arrow.setAttribute('class', 'arrow')
@@ -287,7 +287,7 @@ function buildCard(event, index, events, onSelect) {
 
     const arrowB = document.createElementNS(svgNS, "image")
     arrowB.setAttribute("href", "./images/arrowB.png")
-    arrowB.setAttribute("x", svgWidth - 500); arrowB.setAttribute("y", 5)
+    arrowB.setAttribute("x", screenWidth - 300); arrowB.setAttribute("y", 5)
     /* ebb: Moved to CSS: Need a more flexible way to set the width on these arrows relative to viewport. 
     arrowB.setAttribute("width", 200); arrowB.setAttribute("height", 120)*/
     arrowB.setAttribute('class', 'arrow')
