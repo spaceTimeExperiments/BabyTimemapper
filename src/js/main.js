@@ -264,7 +264,7 @@ function buildCard(event, index, events, onSelect) {
 
     const arrow = document.createElementNS(svgNS, "image")
     arrow.setAttribute("href", "./images/arrow.png")
-    arrow.setAttribute("x", svgWidth - 400); arrow.setAttribute("y", 5) /* ebb: changed from y of 55 */
+    arrow.setAttribute("x", screenWidth - 400); arrow.setAttribute("y", 5) /* ebb: changed from y of 55 */
     /* ebb: Moved to CSS: Need a more flexible way to set the width on these arrows relative to viewport. 
     arrow.setAttribute("width", 200); arrow.setAttribute("height", 120)*/
     arrow.setAttribute('class', 'arrow')
