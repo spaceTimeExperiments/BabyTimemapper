@@ -11,12 +11,15 @@ For those looking to use the GitHub based method, you can follow these steps to 
 First thing that everyone should do is install Node.js to their system:
 ### For MAC: 
 
-* Download and install Homebrew if not already installed
+Download and install Homebrew if not already installed
 ```curl -o- https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash```
+
 Download and install Node.js:
 ```brew install node@24```
+
 Verify the Node.js version:
 ```node -v # Should print "v24.18.0" or whatever the latest version is.```
+
 Verify npm version:
 ```npm -v # Should print "11.16.0" or whatever the latest version is.```
 
@@ -25,10 +28,13 @@ Verify npm version:
 
 Download and install Chocolatey:
 ```powershell -c "irm https://community.chocolatey.org/install.ps1|iex"```
+
 Download and install Node.js:
 ```choco install nodejs --version="26.5.0"```
+
 Verify the Node.js version:
 ```node -v # Should print "v26.5.0".```
+
 Verify npm version:
 ```npm -v # Should print "11.17.0".```
 
