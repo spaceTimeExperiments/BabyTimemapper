@@ -64,6 +64,13 @@ These files NEED to stay where they are, ```events.xml``` must be in the public 
 ## What to do after editing events.xml
 There will be a series of npm commands that is needed in order to build the website, they are as follows:
 ```npm run dev```
+* This will run a local version of the site in your browser, just copy and paste the link it provides to pull up the site
+
 ```npm run build```
+* This will build the site for deployment by packaging it up in the dist folder
+
 ```npm run preview```
+* This is similar to npm run dev, it will run a preview of what the site will look like when deployed on github pages, you can view it by also copy and pasting the link it provides
+
 ```npm run deploy```
+* This will deploy your site to github pages where it can be accessed online through the webadress on your repo
