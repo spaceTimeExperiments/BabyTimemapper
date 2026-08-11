@@ -43,7 +43,7 @@ Verify npm version:
 ### Make sure to clone this repo to your local directory before the next step!
 ```git clone https://github.com/spaceTimeExperiments/timeMapper2```
 
-You can also download a .zip file if you cant clone the repo itself, the files can be found when clicking the releases section on the GitHub page and clicking the latest versions tag
+You can also download a .zip file if you cant clone the repo itself, the files can be found when clicking the releases section on the GitHub page and clicking the latest version
 
 Please make sure you have your own repo set up for working with this project, DO NOT push anything back to this repo!
 
@@ -107,3 +107,5 @@ There will be a series of npm commands that is needed in order to build the webs
 Your workflow will look something like;
 
 ```npm run dev --> editing events.xml --> exit npm run dev --> npm run build --> npm run preview --> exit npm run preview --> npm run deploy --> add --> commit --> push```
+
+Using these commands will allow you to host your own BabyTimemapper with just your events displayed in it, this way you can share it freely with others and none of the data will be messed up

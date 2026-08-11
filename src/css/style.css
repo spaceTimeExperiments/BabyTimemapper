@@ -69,20 +69,16 @@ body {
 }
 
 #card-panel .card-date {
-  font-size: 2vw;
+  font-size: 3vw;
 
 }
 #card-panel .card-title {
-  font-size: 1vw;
+  font-size: 2vw;
 
 }
 
 #card-panel .card-desc {
-   font-size: 1vw;
-}
-
-line {
-  stroke-width:.2vw;
+   font-size: 1.7vw;
 }
 
 /* -------------------------------------------------------------------------
