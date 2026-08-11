@@ -177,6 +177,7 @@ function buildCard(event, index, events, onSelect) {
   const svgNS = "http://www.w3.org/2000/svg"
 
   const svg = document.createElementNS(svgNS, "svg")
+  svg.setAttribute('class', 'card')
   svg.setAttribute('viewBox', `0 0 ${svgWidth} ${svgHeight}`)
   svg.setAttribute('width', svgWidth)
   svg.setAttribute('height', svgHeight)
@@ -269,6 +270,8 @@ function buildCard(event, index, events, onSelect) {
     arrow.setAttribute("width", 200); arrow.setAttribute("height", 120)*/
     arrow.setAttribute('class', 'arrow')
     nextBtn.appendChild(arrow)
+
+    console.log(arrow)
   }
 
   // Previous button — only show if there's a previous event
