@@ -60,3 +60,10 @@ There are simple rules and directions in ```eventsTemplate.xml``` which are:
 * Each track can have multiple events
 
 These files NEED to stay where they are, ```events.xml``` must be in the public folder in order for things to work properly. 
+
+## What to do after editing events.xml
+There will be a series of npm commands that is needed in order to build the website, they are as follows:
+```npm run dev```
+```npm run build```
+```npm run preview```
+```npm run deploy```
