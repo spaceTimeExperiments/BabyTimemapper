@@ -48,6 +48,29 @@ Please make sure you have your own repo set up for working with this project, DO
 Once you have Node.js installed you'll need to install the node files needed to run the program, the command is:
 ```npm install```
 
+## The folder structure of BabyTimemapper
+BabyTimemapper/
+|-dist
+|-fonts
+|-node_modules (this one will not be visible since it will be in the gitignore)
+|-public
+| |-images
+| |-events.xml
+|-src
+| |-css
+| | |-style.css
+| |-js
+| | |-main.js
+| |-notes
+| | |-eventsFilled.xml
+| | |-eventsTemplate.xml
+|.gitignore
+|index.html
+|package-lock.json
+|package.json
+|README.md
+|vite.config.js
+
 ### Once this is complete you should be able to use ```events.xml``` in dist/public to edit the events shown on BabyTimemapper!
 
 ## Editing events.xml
@@ -63,6 +86,7 @@ These files NEED to stay where they are, ```events.xml``` must be in the public 
 
 ## What to do after editing events.xml
 There will be a series of npm commands that is needed in order to build the website, they are as follows:
+
 ```npm run dev```
 * This will run a local version of the site in your browser, just copy and paste the link it provides to pull up the site
 
@@ -74,3 +98,4 @@ There will be a series of npm commands that is needed in order to build the webs
 
 ```npm run deploy```
 * This will deploy your site to github pages where it can be accessed online through the webadress on your repo
+
