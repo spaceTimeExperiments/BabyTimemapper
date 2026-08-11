@@ -11,7 +11,7 @@ For those looking to use the GitHub based method, you can follow these steps to 
 First thing that everyone should do is install Node.js to their system:
 ### For MAC: 
 
-Download and install Homebrew if not already installed 
+* Download and install Homebrew if not already installed
 ```curl -o- https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash```
 Download and install Node.js:
 ```brew install node@24```
