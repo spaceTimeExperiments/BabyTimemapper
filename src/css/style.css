@@ -26,12 +26,14 @@ body {
 }
 
 #map {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 20vw;
   border: none;
 }
 
 .map-frame::after {
+  height: 20.9vw;
+  width: 100vw;
   content: "";
   position: absolute;
   inset: 0;
@@ -50,7 +52,7 @@ body {
 }
 
 #card-panel {
-  height: 11.2vw;
+  height: 160px;
   background: #ecece8;
   background-size: cover;
   background-repeat: no-repeat;
