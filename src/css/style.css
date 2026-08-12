@@ -26,14 +26,14 @@ body {
 }
 
 #map {
-  width: 100vw;
-  height: 20vw;
+  width: clamp(50rem, 100vw, 100rem);
+  height: clamp(10rem, 20vw, 20rem);
   border: none;
 }
 
 .map-frame::after {
-  height: 20.9vw;
-  width: 100vw;
+  width: clamp(50rem, 100vw, 100rem);
+  height: clamp(10rem, 20.9vw, 20rem);
   content: "";
   position: absolute;
   inset: 0;
