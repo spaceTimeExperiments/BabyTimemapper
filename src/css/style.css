@@ -33,7 +33,7 @@ body {
 
 .map-frame::after {
   width: clamp(20rem, 100vw, 100rem);
-  height: clamp(18.7rem, 18.7vw, 18.7rem);
+  height: clamp(18.7rem, 18.7vw, 30rem);
   content: "";
   position: absolute;
   inset: 0;
